@@ -116,8 +116,10 @@ public class PlayerController : MonoBehaviour
 			grabbedObject.rigidbody2D.velocity = force * 50.0f;
 		}
 
-		if (!isStanding)
+		if (grabbedObject != null)
 		{
+			Vector3 posDiff = grabbedObject.transform.position - transform.position;
+			if(Mathf.Abs(posDiff.x) > 1.0f || Mathf.Abs(posDiff.y) > 1.0f / 128.0f)
 			grabbedObject = null;
 		}
 
