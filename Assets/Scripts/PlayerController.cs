@@ -6,68 +6,74 @@ public class PlayerController : MonoBehaviour
 	public float topSpeed = 10.0f;
 	public float jumpSpeed = 10.0f;
 	public float wallJumpPower = 1.0f;
-	public int maxJumps = 2;
-	public int maxJumpsFromWall = 1;
-	
+	public float wallSlideSpeed = 1.0f;
+	public float deadlyMomentum = 5.0f;
+
+	public static Vector2 spawnPos;
 	private bool facingRight = true;
 	private bool gravityDown = true;
 	private Vector3 desiredScale = new Vector3(1.0f, 1.0f, 1.0f);
-	private int jump = 0;
 
 	private Transform upward;
 	private Transform downward;
 	private Transform forward;
 	private Transform backward;
 	private int terrainLayerMask;
-	private bool jumpedThisTick = false;
 
+	private GameObject animatedChild;
 	private Animator animator;
 
 	void Start()
 	{
+		spawnPos = transform.position;
+
+		animatedChild = transform.FindChild("Teslaboy_Anim").gameObject;
+		animator = animatedChild.GetComponent<Animator>();
+
 		upward = transform.FindChild("Upward");
 		downward = transform.FindChild("Downward");
 		forward = transform.FindChild("Forward");
 		backward = transform.FindChild("Backward");
 		terrainLayerMask = LayerMask.GetMask("Terrain");
-
-		animator = GetComponent<Animator>();
 	}
 
 	void Update()
 	{
-		bool isStanding = checkSideForCollision(downward);
+		bool isStanding = touchingGround();
+		bool facingWall = touchingWall();
 
-		jumpedThisTick = false;
-		if (jump > 0 && Input.GetButtonDown("Jump"))
+		if (isStanding) animator.SetBool("JumpingFromWall", false);
+
+		if (Input.GetButtonDown("Jump"))
 		{
-			jumpedThisTick = true;
-
 			Vector3 vel;
-			if (checkSideForCollision(forward) && !isStanding)
+			if (facingWall && !isStanding)
 			{
 				vel = new Vector2(facingRight ? -wallJumpPower : wallJumpPower, gravityDown ? 1.0f : -1.0f);
 				vel = vel.normalized * jumpSpeed;
 
 				updateFacing(!facingRight);
+				animator.SetBool("JumpingFromWall", true);
+			}
+			else if (isStanding)
+			{
+				vel = new Vector2(rigidbody2D.velocity.x, gravityDown ? jumpSpeed : -jumpSpeed);
+				animator.SetBool("OnWall", !isStanding && facingWall);
 			}
 			else
 			{
-				vel = new Vector2(rigidbody2D.velocity.x, gravityDown ? jumpSpeed : -jumpSpeed);
+				vel = rigidbody2D.velocity;
 			}
 			rigidbody2D.velocity = vel;
-
-			jump--;
 		}
 
 		animator.SetBool("Jumping", !isStanding);
-		animator.SetFloat("Speed", rigidbody2D.velocity.x);
-
-		Debug.Log(animator.GetCurrentAnimatorStateInfo(0).nameHash + " " + Animator.StringToHash("Base Layer.Running"));
+		animator.SetFloat("Speed", Mathf.Abs(rigidbody2D.velocity.x));
+		animator.SetBool("OnWall", !isStanding && facingWall);
 
 		if (animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Running"))
 		{
-			animator.speed = Mathf.Abs(rigidbody2D.velocity.x / 5.0f);
+			animator.speed = Mathf.Abs(rigidbody2D.velocity.x / 4.0f);
 		}
 	}
 
@@ -82,13 +88,26 @@ public class PlayerController : MonoBehaviour
 		this.facingRight = facingRight;
 		desiredScale.x = facingRight ? 1.0f : -1.0f;
 	}
+
+	private bool touchingGround()
+	{
+		return Physics2D.OverlapArea(transform.position + new Vector3(-0.375f, gravityDown ? -0.5f : 0.5f, 0.0f), transform.position + new Vector3(0.375f, gravityDown ? -0.625f : 0.625f, 0.0f), terrainLayerMask) != null;
+	}
+
+	private bool touchingWall()
+	{
+		return facingRight ? checkSideForCollision(forward) : checkSideForCollision(backward);
+	}
 	
 	void FixedUpdate()
 	{
 		float speed = Input.GetAxis("Horizontal") * topSpeed;
 		float gravity = Input.GetAxis("Vertical");
 
-		if (checkSideForCollision(downward))
+		bool isStanding = touchingGround();
+		bool facingWall = touchingWall();
+
+		if (isStanding)
 		{
 			if (speed != 0.0f)
 			{
@@ -112,23 +131,37 @@ public class PlayerController : MonoBehaviour
 		}
 
 		float x = rigidbody2D.velocity.x + speed * Time.deltaTime * 3.0f;
+		float y = rigidbody2D.velocity.y;
+
+		if (speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
+		{
+			if (y < -wallSlideSpeed) y = (-wallSlideSpeed + y * 3) / 4.0f;
+		}
 
 		if (x > topSpeed) x = topSpeed;
 		else if (x < -topSpeed) x = -topSpeed;
 
-		rigidbody2D.velocity = new Vector2(x, rigidbody2D.velocity.y);
+		rigidbody2D.velocity = new Vector2(x, y);
 
-		transform.localScale = (transform.localScale * 2.0f + desiredScale) / 3.0f;
+		animatedChild.transform.localScale = (animatedChild.transform.localScale * 2.0f + desiredScale) / 3.0f;
+	}
 
-		if (!jumpedThisTick)
+	void OnCollisionStay2D(Collision2D collision)
+	{
+		Rigidbody2D other = collision.gameObject.rigidbody2D;
+		
+		if (other)
 		{
-			if (checkSideForCollision(downward))
+			float f = (other.velocity.y - rigidbody2D.velocity.y) * other.mass;
+			if (Mathf.Abs(f) > deadlyMomentum)
 			{
-				jump = maxJumps;
-			}
-			else if (checkSideForCollision(forward))
-			{
-				jump = maxJumpsFromWall;
+				if (f > 0.0f ^ animatedChild.transform.localScale.y > 0.0f)
+				{
+					if (touchingGround())
+					{
+						transform.position = spawnPos;
+					}
+				}
 			}
 		}
 	}
