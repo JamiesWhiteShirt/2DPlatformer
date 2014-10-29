@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
 	private Vector2 spawnPos;
 	private bool facingRight = true;
 	private bool gravityDown = true;
-	private Vector3 desiredScale = new Vector3(1.0f, 1.0f, 1.0f);
 
 	private Transform upward;
 	private Transform downward;
 	private Transform forward;
 	private Transform backward;
 	private int terrainLayerMask;
+
+	private GameObject grabbedObject;
+	private bool grabbedOnRight;
 
 	private GameObject animatedChild;
 	private Animator animator;
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
 		if (isStanding) animator.SetBool("JumpingFromWall", false);
 
-		if (Input.GetButtonDown("Jump"))
+		if (grabbedObject == null && Input.GetButtonDown("Jump"))
 		{
 			Vector3 vel;
 			if (facingWall && !isStanding)
@@ -81,6 +83,48 @@ public class PlayerController : MonoBehaviour
 			rigidbody2D.velocity = vel;
 		}
 
+		if (Input.GetButtonDown("Grab"))
+		{
+			RaycastHit2D hit = simpleRay(getForwardTransform());
+
+			if (hit.collider != null && hit.collider.gameObject.tag == "Grabbable")
+			{
+				grabbedObject = hit.collider.gameObject;
+				grabbedOnRight = hit.collider.transform.position.x > transform.position.x;
+			}
+		}
+		if (Input.GetButtonUp("Grab"))
+		{
+			grabbedObject = null;
+		}
+
+		if (grabbedObject != null)
+		{
+			Vector2 otherPos = new Vector2(grabbedObject.transform.position.x, grabbedObject.transform.position.y);
+			Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
+			Vector2 desiredPosition = thisPos + new Vector2(grabbedOnRight ? 1.0f : -1.0f, 0.0f);
+
+			Vector2 force = (desiredPosition - otherPos).normalized * 5.0f;
+			if ((desiredPosition - otherPos).magnitude < force.magnitude)
+			{
+				force = desiredPosition - otherPos;
+			}
+
+			grabbedObject.rigidbody2D.velocity = force * 50.0f;
+
+			/*Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
+			grabbedObject.transform.position = thisPos + new Vector2(facingRight ? 1.25f : -1.25f, 0.0f);
+
+			Vector2 medianVelocity = (grabbedObject.rigidbody2D.velocity + rigidbody2D.velocity) / 2.0f;
+			grabbedObject.rigidbody2D.velocity = medianVelocity;
+			rigidbody2D.velocity = medianVelocity;*/
+		}
+
+		if (!isStanding)
+		{
+			grabbedObject = null;
+		}
+
 		animator.SetBool("Jumping", !isStanding);
 		animator.SetFloat("Speed", Mathf.Abs(rigidbody2D.velocity.x));
 		animator.SetBool("OnWall", !isStanding && facingWall);
@@ -91,16 +135,25 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private bool checkSideForCollision(Transform side)
+	private Vector3 getDesiredScale()
+	{
+		return new Vector3((grabbedObject == null ? facingRight : grabbedOnRight) ? 1.0f : -1.0f, gravityDown ? 1.0f : -1.0f, 1.0f);
+	}
+
+	private RaycastHit2D simpleRay(Transform side)
 	{
 		Vector2 v = side.position - transform.position;
 		return Physics2D.Raycast(transform.position, v.normalized, v.magnitude, terrainLayerMask);
 	}
 
+	private bool checkSideForCollision(Transform side)
+	{
+		return simpleRay(side).collider != null;
+	}
+
 	private void updateFacing(bool facingRight)
 	{
 		this.facingRight = facingRight;
-		desiredScale.x = facingRight ? 1.0f : -1.0f;
 	}
 
 	private bool touchingGround()
@@ -108,14 +161,20 @@ public class PlayerController : MonoBehaviour
 		return Physics2D.OverlapArea(transform.position + new Vector3(-0.375f, gravityDown ? -0.5f : 0.5f, 0.0f), transform.position + new Vector3(0.375f, gravityDown ? -0.625f : 0.625f, 0.0f), terrainLayerMask) != null;
 	}
 
+	private Transform getForwardTransform()
+	{
+		return facingRight ? forward : backward;
+	}
+
 	private bool touchingWall()
 	{
-		return facingRight ? checkSideForCollision(forward) : checkSideForCollision(backward);
+		return checkSideForCollision(getForwardTransform());
 	}
 	
 	void FixedUpdate()
 	{
-		float speed = Input.GetAxis("Horizontal") * topSpeed;
+		float currentTopSpeed = topSpeed * (grabbedObject == null ? 1.0f : 0.5f);
+		float speed = Input.GetAxis("Horizontal") * currentTopSpeed;
 		float gravity = Input.GetAxis("Vertical");
 
 		bool isStanding = touchingGround();
@@ -140,7 +199,6 @@ public class PlayerController : MonoBehaviour
 		if (gravity != 0.0f)
 		{
 			gravityDown = gravity < 0.0f;
-			desiredScale.y = gravityDown ? 1.0f : -1.0f;
 			Physics2D.gravity = new Vector2(0.0f, gravityDown ? -30.0f : 30.0f);
 		}
 
@@ -152,12 +210,12 @@ public class PlayerController : MonoBehaviour
 			if (y < -wallSlideSpeed) y = (-wallSlideSpeed + y * 3) / 4.0f;
 		}
 
-		if (x > topSpeed) x = topSpeed;
-		else if (x < -topSpeed) x = -topSpeed;
+		if (x > currentTopSpeed) x = currentTopSpeed;
+		else if (x < -currentTopSpeed) x = -currentTopSpeed;
 
 		rigidbody2D.velocity = new Vector2(x, y);
 
-		animatedChild.transform.localScale = (animatedChild.transform.localScale * 2.0f + desiredScale) / 3.0f;
+		animatedChild.transform.localScale = (animatedChild.transform.localScale * 2.0f + getDesiredScale()) / 3.0f;
 	}
 
 	void OnCollisionStay2D(Collision2D collision)
