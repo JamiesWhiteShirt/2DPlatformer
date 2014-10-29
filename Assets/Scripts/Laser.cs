@@ -6,10 +6,12 @@ public class Laser : MonoBehaviour
 	public float beamLength = 10.0f;
 
 	private LineRenderer lineRenderer;
+	private ParticleSystem particleSystem;
 
 	void Start ()
 	{
 		lineRenderer = GetComponent<LineRenderer>();
+		particleSystem = transform.FindChild("Fizzle").gameObject.GetComponent<ParticleSystem>();
 	}
 	
 	void Update ()
@@ -28,5 +30,6 @@ public class Laser : MonoBehaviour
 
 		lineRenderer.SetPosition(0, new Vector2(0.0f, 0.0f));
 		lineRenderer.SetPosition(1, new Vector2(laser.magnitude, 0.0f));
+		particleSystem.transform.position = pos + laser;
 	}
 }
