@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
 	private GameObject grabbedObject;
 	private bool grabbedOnRight;
+	private int grabLayerMask;
 
 	private GameObject animatedChild;
 	private Animator animator;
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
 		forward = transform.FindChild("Forward");
 		backward = transform.FindChild("Backward");
 		terrainLayerMask = LayerMask.GetMask("Terrain", "Lightbridge");
+
+		grabLayerMask = LayerMask.GetMask("Terrain");
 	}
 
 	void Update()
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetButtonDown("Grab"))
 		{
-			RaycastHit2D hit = simpleRay(getForwardTransform());
+			RaycastHit2D hit = simpleRay(getForwardTransform(), grabLayerMask);
 
 			if (hit.collider != null && hit.collider.gameObject.tag == "Grabbable")
 			{
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
 		{
 			Vector2 otherPos = new Vector2(grabbedObject.transform.position.x, grabbedObject.transform.position.y);
 			Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
-			Vector2 desiredPosition = thisPos + new Vector2(grabbedOnRight ? 1.0f : -1.0f, 0.0f);
+			Vector2 desiredPosition = thisPos + rigidbody2D.velocity / 50.0f + new Vector2(grabbedOnRight ? 0.9375f : -0.9375f, 0.0f);
 
 			Vector2 force = (desiredPosition - otherPos).normalized * 5.0f;
 			if ((desiredPosition - otherPos).magnitude < force.magnitude)
@@ -111,13 +114,6 @@ public class PlayerController : MonoBehaviour
 			}
 
 			grabbedObject.rigidbody2D.velocity = force * 50.0f;
-
-			/*Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
-			grabbedObject.transform.position = thisPos + new Vector2(facingRight ? 1.25f : -1.25f, 0.0f);
-
-			Vector2 medianVelocity = (grabbedObject.rigidbody2D.velocity + rigidbody2D.velocity) / 2.0f;
-			grabbedObject.rigidbody2D.velocity = medianVelocity;
-			rigidbody2D.velocity = medianVelocity;*/
 		}
 
 		if (!isStanding)
@@ -128,10 +124,21 @@ public class PlayerController : MonoBehaviour
 		animator.SetBool("Jumping", !isStanding);
 		animator.SetFloat("Speed", Mathf.Abs(rigidbody2D.velocity.x));
 		animator.SetBool("OnWall", !isStanding && facingWall);
+		animator.SetBool("Grabbing", grabbedObject != null);
 
-		if (animator.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Running"))
+		int nameHash = animator.GetCurrentAnimatorStateInfo(0).nameHash;
+
+		if (nameHash == Animator.StringToHash("Base Layer.Running"))
 		{
 			animator.speed = Mathf.Abs(rigidbody2D.velocity.x / 4.0f);
+		}
+		else if (nameHash == Animator.StringToHash("Base Layer.GrabbingRunning"))
+		{
+			animator.speed = Mathf.Abs(rigidbody2D.velocity.x / 3.0f);
+		}
+		else
+		{
+			animator.speed = 1.0f;
 		}
 	}
 
@@ -140,15 +147,15 @@ public class PlayerController : MonoBehaviour
 		return new Vector3((grabbedObject == null ? facingRight : grabbedOnRight) ? 1.0f : -1.0f, gravityDown ? 1.0f : -1.0f, 1.0f);
 	}
 
-	private RaycastHit2D simpleRay(Transform side)
+	private RaycastHit2D simpleRay(Transform side, int layerMask)
 	{
 		Vector2 v = side.position - transform.position;
-		return Physics2D.Raycast(transform.position, v.normalized, v.magnitude, terrainLayerMask);
+		return Physics2D.Raycast(transform.position, v.normalized, v.magnitude, layerMask);
 	}
 
 	private bool checkSideForCollision(Transform side)
 	{
-		return simpleRay(side).collider != null;
+		return simpleRay(side, terrainLayerMask).collider != null;
 	}
 
 	private void updateFacing(bool facingRight)
