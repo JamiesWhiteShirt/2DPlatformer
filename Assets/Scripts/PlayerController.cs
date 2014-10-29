@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 		downward = transform.FindChild("Downward");
 		forward = transform.FindChild("Forward");
 		backward = transform.FindChild("Backward");
-		terrainLayerMask = LayerMask.GetMask("Terrain");
+		terrainLayerMask = LayerMask.GetMask("Terrain", "Lightbridge");
 	}
 
 	void Update()
