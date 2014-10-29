@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 	public float wallSlideSpeed = 1.0f;
 	public float deadlyMomentum = 5.0f;
 
-	public static Vector2 spawnPos;
+	private Vector2 spawnPos;
 	private bool facingRight = true;
 	private bool gravityDown = true;
 	private Vector3 desiredScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -23,9 +23,23 @@ public class PlayerController : MonoBehaviour
 	private GameObject animatedChild;
 	private Animator animator;
 
+	public static PlayerController me;
+
+	public static bool IsMe(GameObject obj)
+	{
+		return me.gameObject == obj;
+	}
+
+	public static void Kill()
+	{
+		me.transform.position = me.spawnPos;
+		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
+	}
+
 	void Start()
 	{
 		spawnPos = transform.position;
+		me = this;
 
 		animatedChild = transform.FindChild("Teslaboy_Anim").gameObject;
 		animator = animatedChild.GetComponent<Animator>();
@@ -159,7 +173,7 @@ public class PlayerController : MonoBehaviour
 				{
 					if (touchingGround())
 					{
-						transform.position = spawnPos;
+						Kill();
 					}
 				}
 			}

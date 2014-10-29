@@ -19,9 +19,9 @@ public class Laser : MonoBehaviour
 		Vector2 pos = new Vector2(transform.position.x, transform.position.y);
 		RaycastHit2D ray = Physics2D.Raycast(pos + beamVec.normalized * 0.125f, beamVec.normalized, beamLength);
 
-		if (ray.collider != null && ray.collider.gameObject.tag == "Player")
+		if (ray.collider != null && PlayerController.IsMe(ray.collider.gameObject))
 		{
-			ray.collider.gameObject.transform.position = PlayerController.spawnPos;
+			PlayerController.Kill();
 		}
 
 		Vector2 laser = ray.collider == null ? beamVec : (ray.point - pos);
