@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	private Transform backward;
 	private int terrainLayerMask;
 
-	private GameObject grabbedObject;
+	private Grabbable grabbedObject;
 	private bool grabbedOnRight;
 	private int grabLayerMask;
 
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
 	public static void Kill()
 	{
+		if (me == null) return;
+		me.setGrabbedObject(null);
 		me.transform.position = me.spawnPos;
 		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
 	}
@@ -51,9 +53,20 @@ public class PlayerController : MonoBehaviour
 		downward = transform.FindChild("Downward");
 		forward = transform.FindChild("Forward");
 		backward = transform.FindChild("Backward");
-		terrainLayerMask = LayerMask.GetMask("Terrain", "Lightbridge");
+		terrainLayerMask = LayerMask.GetMask("Terrain", "Lightbridge", "Reflector");
 
 		grabLayerMask = LayerMask.GetMask("Terrain");
+	}
+
+	private void setGrabbedObject(Grabbable grabbable)
+	{
+		if (grabbedObject != null) grabbedObject.grabbedByPlayer = false;
+		if (grabbable != null)
+		{
+			grabbable.grabbedByPlayer = true;
+			grabbedOnRight = grabbable.transform.position.x > transform.position.x;
+		}
+		grabbedObject = grabbable;
 	}
 
 	void Update()
@@ -90,22 +103,30 @@ public class PlayerController : MonoBehaviour
 		{
 			RaycastHit2D hit = simpleRay(getForwardTransform(), grabLayerMask);
 
-			if (hit.collider != null && hit.collider.gameObject.tag == "Grabbable")
+			if (hit.collider != null)
 			{
-				grabbedObject = hit.collider.gameObject;
-				grabbedOnRight = hit.collider.transform.position.x > transform.position.x;
+				setGrabbedObject(hit.collider.gameObject.GetComponent<Grabbable>());
 			}
 		}
 		if (Input.GetButtonUp("Grab"))
 		{
-			grabbedObject = null;
+			setGrabbedObject(null);
+		}
+
+		if (grabbedObject != null)
+		{
+			Vector3 posDiff = grabbedObject.transform.position - transform.position;
+			if (posDiff.magnitude > 1.0f)
+			{
+				setGrabbedObject(null);
+			}
 		}
 
 		if (grabbedObject != null)
 		{
 			Vector2 otherPos = new Vector2(grabbedObject.transform.position.x, grabbedObject.transform.position.y);
 			Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
-			Vector2 desiredPosition = thisPos + rigidbody2D.velocity / 50.0f + new Vector2(grabbedOnRight ? 0.9375f : -0.9375f, 0.0f);
+			Vector2 desiredPosition = thisPos + rigidbody2D.velocity / 50.0f + new Vector2(grabbedOnRight ? 0.9375f : -0.9375f, (gravityDown ? 1.0f : -1.0f) / 64.0f);
 
 			Vector2 force = (desiredPosition - otherPos).normalized * 5.0f;
 			if ((desiredPosition - otherPos).magnitude < force.magnitude)
@@ -114,13 +135,6 @@ public class PlayerController : MonoBehaviour
 			}
 
 			grabbedObject.rigidbody2D.velocity = force * 50.0f;
-		}
-
-		if (grabbedObject != null)
-		{
-			Vector3 posDiff = grabbedObject.transform.position - transform.position;
-			if(Mathf.Abs(posDiff.x) > 1.0f || Mathf.Abs(posDiff.y) > 1.0f / 128.0f)
-			grabbedObject = null;
 		}
 
 		animator.SetBool("Jumping", !isStanding);
@@ -214,7 +228,7 @@ public class PlayerController : MonoBehaviour
 		float x = rigidbody2D.velocity.x + speed * Time.deltaTime * 3.0f;
 		float y = rigidbody2D.velocity.y;
 
-		if (speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
+		if (grabbedObject == null && speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
 		{
 			if (y < -wallSlideSpeed) y = (-wallSlideSpeed + y * 3) / 4.0f;
 		}

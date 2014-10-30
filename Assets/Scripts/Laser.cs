@@ -1,38 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Laser : MonoBehaviour
+public class Laser : ReflectableRay
 {
-	public float beamLength = 10.0f;
+	private ParticleSystem fizzle;
 
-	private LineRenderer lineRenderer;
-	private ParticleSystem particleSystem;
-	private int layerMask;
-
-	void Start ()
+	public virtual void Start ()
 	{
-		lineRenderer = GetComponent<LineRenderer>();
-		particleSystem = transform.FindChild("Fizzle").gameObject.GetComponent<ParticleSystem>();
+		base.Start();
+		fizzle = transform.FindChild("Fizzle").gameObject.GetComponent<ParticleSystem>();
 		layerMask = LayerMask.GetMask("Terrain", "Player");
 	}
-	
-	void Update ()
+
+	public override void RayHit(RaycastHit2D ray, Vector2 fromPoint, Vector2 hitPoint)
 	{
-		Vector2 beamVec = transform.rotation * new Vector2(beamLength, 0.0f);
-
-		Vector2 pos = new Vector2(transform.position.x, transform.position.y);
-		RaycastHit2D ray = Physics2D.Raycast(pos + beamVec.normalized * 0.125f, beamVec.normalized, beamLength, layerMask);
-
 		if (ray.collider != null && PlayerController.IsMe(ray.collider.gameObject))
 		{
 			PlayerController.Kill();
 		}
 
-		Vector2 laser = ray.collider == null ? beamVec : (ray.point - pos);
+		fizzle.transform.position = hitPoint;
 
-		lineRenderer.SetPosition(0, new Vector2(0.0f, 0.0f));
-		lineRenderer.SetPosition(1, new Vector2(laser.magnitude, 0.0f));
-
-		particleSystem.transform.position = pos + laser;
+		if (ray.collider == null)
+		{
+			fizzle.enableEmission = false;
+		}
+		else if (ray.collider.gameObject.GetComponent<Reflector>() != null)
+		{
+			fizzle.enableEmission = false;
+		}
+		else
+		{
+			fizzle.enableEmission = true;
+		}
 	}
 }
