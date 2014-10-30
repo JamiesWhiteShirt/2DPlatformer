@@ -105,7 +105,11 @@ public class PlayerController : MonoBehaviour
 
 			if (hit.collider != null)
 			{
-				setGrabbedObject(hit.collider.gameObject.GetComponent<Grabbable>());
+				Grabbable grabbable = hit.collider.gameObject.GetComponent<Grabbable>();
+				if (grabbable.grabbableByPlayer)
+				{
+					setGrabbedObject(grabbable);
+				}
 			}
 		}
 		if (Input.GetButtonUp("Grab"))

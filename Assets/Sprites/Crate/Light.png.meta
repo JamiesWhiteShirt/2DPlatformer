@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 0411c9c03394c6e40b407ae8bc993ae6
+guid: f714ce5431d06214197b07740b34ae33
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Optical
-    21300002: Light Crate
+    21300000: Crate
+    21300002: Light
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

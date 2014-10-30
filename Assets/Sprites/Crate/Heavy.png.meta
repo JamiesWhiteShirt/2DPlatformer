@@ -1,8 +1,10 @@
 fileFormatVersion: 2
-guid: f714ce5431d06214197b07740b34ae33
+guid: 0411c9c03394c6e40b407ae8bc993ae6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Crate
+    21300000: Optical
+    21300002: Light Crate
+    21300004: Heavy
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +28,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
