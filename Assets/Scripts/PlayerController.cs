@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 	public float wallJumpPower = 1.0f;
 	public float wallSlideSpeed = 1.0f;
 
-	private Vector2 spawnPos;
 	private bool facingRight = true;
 	private bool gravityDown = true;
 	private int gravityZoneLayerMask;
@@ -36,50 +35,71 @@ public class PlayerController : MonoBehaviour
 
 	public static void Kill()
 	{
-		/*if (me == null) return;
-		me.setGrabbedObject(null);
-		me.transform.position = me.spawnPos;
-		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);*/
-
 		if (me == null)
 		{
 			Goal.ReloadCurrentScene();
 		}
 		else
 		{
-			me.kill();
+			me.disappear(true);
 		}
 	}
 
-	private void kill()
+	private void disappear(bool kill)
 	{
 		pepsi = true;
 		grabbedObject = null;
 		rigidbody2D.isKinematic = true;
-
 		GetComponent<BoxCollider2D>().enabled = false;
 
-		StartCoroutine("fade");
+		StartCoroutine(fade(kill));
 	}
 
-	private IEnumerator fade()
+	private IEnumerator fade(bool kill)
 	{
 		SpriteRenderer spriteRenderer = animatedChild.GetComponent<SpriteRenderer>();
+		Vector3 desiredScale = getDesiredScale();
+		Vector3 initialPosition = transform.position;
 		for(float f = 1.0f; f > 0.0f; f -= 1.0f / 32.0f)
 		{
 			spriteRenderer.color = new Color(f, f, f);
-			float scale = Mathf.Sqrt(f);
-			animatedChild.transform.localScale = new Vector3(scale, scale, 1.0f);
+
+			float sqf = Mathf.Sqrt(f);
+			animatedChild.transform.localScale = new Vector3(sqf * desiredScale.x, sqf * desiredScale.y, 1.0f);
+			if (!kill)
+			{
+				transform.position = Vector3.Lerp(Goal.currentGoal.transform.position, initialPosition, sqf);
+			}
+
 			yield return null;
 		}
 
-		Goal.ReloadCurrentScene();
+		setGravity(true);
+		if (kill)
+		{
+			Goal.ReloadCurrentScene();
+		}
+		else
+		{
+			Goal.NextScene();
+		}
 		yield return null;
+	}
+
+	public static void Complete()
+	{
+		if (me == null)
+		{
+			Goal.NextScene();
+		}
+		else
+		{
+			me.disappear(false);
+		}
 	}
 
 	void Start()
 	{
-		spawnPos = transform.position;
 		me = this;
 
 		gravityZoneLayerMask = LayerMask.GetMask("GravityZone");
@@ -226,6 +246,12 @@ public class PlayerController : MonoBehaviour
 		this.facingRight = facingRight;
 	}
 
+	private void setGravity(bool down)
+	{
+		gravityDown = down;
+		Physics2D.gravity = new Vector2(0.0f, gravityDown ? -30.0f : 30.0f);
+	}
+
 	private bool touchingGround()
 	{
 		return Physics2D.OverlapArea(transform.position + new Vector3(-0.375f, gravityDown ? -0.5f : 0.5f, 0.0f), transform.position + new Vector3(0.375f, gravityDown ? -0.625f : 0.625f, 0.0f), terrainLayerMask) != null;
@@ -280,8 +306,7 @@ public class PlayerController : MonoBehaviour
 		
 		if (gravity != 0.0f && isInGravityZone())
 		{
-			gravityDown = gravity < 0.0f;
-			Physics2D.gravity = new Vector2(0.0f, gravityDown ? -30.0f : 30.0f);
+			setGravity(gravity < 0.0f);
 		}
 
 		float x = rigidbody2D.velocity.x + speed * Time.deltaTime * 3.0f;

@@ -5,6 +5,7 @@ using System.Collections;
 public class Goal : MonoBehaviour
 {
 	private static int currrentScene;
+	public static Goal currentGoal;
 
 	public static void ReloadCurrentScene()
 	{
@@ -23,7 +24,7 @@ public class Goal : MonoBehaviour
 
 	void Start ()
 	{
-		
+		currentGoal = this;
 	}
 	
 	void Update ()
@@ -33,9 +34,9 @@ public class Goal : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Player")
+		if (PlayerController.IsMe(other.gameObject))
 		{
-			NextScene();
+			PlayerController.Complete();
 		}
 	}
 }
