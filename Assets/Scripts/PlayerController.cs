@@ -35,10 +35,12 @@ public class PlayerController : MonoBehaviour
 
 	public static void Kill()
 	{
-		if (me == null) return;
+		/*if (me == null) return;
 		me.setGrabbedObject(null);
 		me.transform.position = me.spawnPos;
-		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);
+		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);*/
+
+		Goal.ReloadCurrentScene();
 	}
 
 	void Start()
