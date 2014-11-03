@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 	private Animator animator;
 
 	public static PlayerController me;
+	private bool pepsi;
 
 	public static bool IsMe(GameObject obj)
 	{
@@ -40,7 +41,40 @@ public class PlayerController : MonoBehaviour
 		me.transform.position = me.spawnPos;
 		me.rigidbody2D.velocity = new Vector2(0.0f, 0.0f);*/
 
+		if (me == null)
+		{
+			Goal.ReloadCurrentScene();
+		}
+		else
+		{
+			me.kill();
+		}
+	}
+
+	private void kill()
+	{
+		pepsi = true;
+		grabbedObject = null;
+		rigidbody2D.isKinematic = true;
+
+		GetComponent<BoxCollider2D>().enabled = false;
+
+		StartCoroutine("fade");
+	}
+
+	private IEnumerator fade()
+	{
+		SpriteRenderer spriteRenderer = animatedChild.GetComponent<SpriteRenderer>();
+		for(float f = 1.0f; f > 0.0f; f -= 1.0f / 32.0f)
+		{
+			spriteRenderer.color = new Color(f, f, f);
+			float scale = Mathf.Sqrt(f);
+			animatedChild.transform.localScale = new Vector3(scale, scale, 1.0f);
+			yield return null;
+		}
+
 		Goal.ReloadCurrentScene();
+		yield return null;
 	}
 
 	void Start()
@@ -75,6 +109,11 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		if (pepsi)
+		{
+			return;
+		}
+
 		bool isStanding = touchingGround();
 		bool facingWall = touchingWall();
 
@@ -211,6 +250,11 @@ public class PlayerController : MonoBehaviour
 	
 	void FixedUpdate()
 	{
+		if (pepsi)
+		{
+			return;
+		}
+
 		float currentTopSpeed = topSpeed * (grabbedObject == null ? 1.0f : 0.5f);
 		float speed = Input.GetAxis("Horizontal") * currentTopSpeed;
 		float gravity = Input.GetAxis("Vertical");
@@ -258,18 +302,21 @@ public class PlayerController : MonoBehaviour
 
 	void OnCollisionStay2D(Collision2D collision)
 	{
-		Rigidbody2D other = collision.gameObject.rigidbody2D;
-		
-		if (other != null)
+		if (!pepsi)
 		{
-			if (touchingGround())
-			{
-				Bounds bounds1 = GetComponent<BoxCollider2D>().bounds;
-				Bounds bounds2 = collision.gameObject.GetComponent<BoxCollider2D>().bounds;
+			Rigidbody2D other = collision.gameObject.rigidbody2D;
 
-				if (bounds1.min.x < bounds2.max.x && bounds1.max.x > bounds2.min.x && (gravityDown ^ transform.position.y > other.transform.position.y))
+			if (other != null)
+			{
+				if (touchingGround())
 				{
-					Kill();
+					Bounds bounds1 = GetComponent<BoxCollider2D>().bounds;
+					Bounds bounds2 = collision.gameObject.GetComponent<BoxCollider2D>().bounds;
+
+					if (bounds1.min.x < bounds2.max.x && bounds1.max.x > bounds2.min.x && (gravityDown ^ transform.position.y > other.transform.position.y))
+					{
+						Kill();
+					}
 				}
 			}
 		}
