@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Goal
+  m_Name: Keys
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -29,7 +29,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: f7d17232cdeb6284faafd7a59b8b1cfb, type: 2}
+  - {fileID: 7400000, guid: a9148eec819ea2b4f89f04d358358540, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

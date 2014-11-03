@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 		grabbedObject = null;
 		rigidbody2D.isKinematic = true;
 		GetComponent<BoxCollider2D>().enabled = false;
+		animator.speed = 0.0f;
 
 		StartCoroutine(fade(kill));
 	}
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
 		SpriteRenderer spriteRenderer = animatedChild.GetComponent<SpriteRenderer>();
 		Vector3 desiredScale = getDesiredScale();
 		Vector3 initialPosition = transform.position;
-		for(float f = 1.0f; f > 0.0f; f -= 1.0f / 32.0f)
+		for(float f = 1.0f; f >= 0.0f; f -= 1.0f / 32.0f)
 		{
 			spriteRenderer.color = new Color(f, f, f);
 
@@ -118,13 +119,16 @@ public class PlayerController : MonoBehaviour
 
 	private void setGrabbedObject(Grabbable grabbable)
 	{
-		if (grabbedObject != null) grabbedObject.grabbedByPlayer = false;
-		if (grabbable != null)
+		if (grabbable == null || Mathf.Abs(rigidbody2D.velocity.x) < 0.01f)
 		{
-			grabbable.grabbedByPlayer = true;
-			grabbedOnRight = grabbable.transform.position.x > transform.position.x;
+			if (grabbedObject != null) grabbedObject.grabbedByPlayer = false;
+			if (grabbable != null)
+			{
+				grabbable.grabbedByPlayer = true;
+				grabbedOnRight = grabbable.transform.position.x > transform.position.x;
+			}
+			grabbedObject = grabbable;
 		}
-		grabbedObject = grabbable;
 	}
 
 	void Update()
@@ -132,6 +136,18 @@ public class PlayerController : MonoBehaviour
 		if (pepsi)
 		{
 			return;
+		}
+
+		if (Input.GetButton("Restart"))
+		{
+			Kill();
+			return;
+		}
+
+		if (Input.GetButtonDown("Eight"))
+		{
+			AudioSource audioSource = GetComponent<AudioSource>();
+			audioSource.Play();
 		}
 
 		bool isStanding = touchingGround();
