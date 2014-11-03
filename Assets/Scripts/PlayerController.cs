@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 spawnPos;
 	private bool facingRight = true;
 	private bool gravityDown = true;
+	private int gravityZoneLayerMask;
 
 	private Transform upward;
 	private Transform downward;
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
 	{
 		spawnPos = transform.position;
 		me = this;
+
+		gravityZoneLayerMask = LayerMask.GetMask("GravityZone");
 
 		animatedChild = transform.FindChild("Teslaboy_Anim").gameObject;
 		animator = animatedChild.GetComponent<Animator>();
@@ -196,6 +199,13 @@ public class PlayerController : MonoBehaviour
 	{
 		return checkSideForCollision(getForwardTransform());
 	}
+
+	private bool isInGravityZone()
+	{
+		Bounds bounds = GetComponent<BoxCollider2D>().bounds;
+
+		return Physics2D.OverlapArea(bounds.min, bounds.max, gravityZoneLayerMask) != null;
+	}
 	
 	void FixedUpdate()
 	{
@@ -222,7 +232,7 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		
-		if (gravity != 0.0f)
+		if (gravity != 0.0f && isInGravityZone())
 		{
 			gravityDown = gravity < 0.0f;
 			Physics2D.gravity = new Vector2(0.0f, gravityDown ? -30.0f : 30.0f);
