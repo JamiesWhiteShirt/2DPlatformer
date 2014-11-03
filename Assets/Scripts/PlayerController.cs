@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 	public float jumpSpeed = 10.0f;
 	public float wallJumpPower = 1.0f;
 	public float wallSlideSpeed = 1.0f;
-	public float deadlyMomentum = 5.0f;
 
 	private Vector2 spawnPos;
 	private bool facingRight = true;
@@ -249,17 +248,16 @@ public class PlayerController : MonoBehaviour
 	{
 		Rigidbody2D other = collision.gameObject.rigidbody2D;
 		
-		if (other)
+		if (other != null)
 		{
-			float f = (other.velocity.y - rigidbody2D.velocity.y) * other.mass;
-			if (Mathf.Abs(f) > deadlyMomentum)
+			if (touchingGround())
 			{
-				if (f > 0.0f ^ animatedChild.transform.localScale.y > 0.0f)
+				Bounds bounds1 = GetComponent<BoxCollider2D>().bounds;
+				Bounds bounds2 = collision.gameObject.GetComponent<BoxCollider2D>().bounds;
+
+				if (bounds1.min.x < bounds2.max.x && bounds1.max.x > bounds2.min.x && (gravityDown ^ transform.position.y > other.transform.position.y))
 				{
-					if (touchingGround())
-					{
-						Kill();
-					}
+					Kill();
 				}
 			}
 		}
