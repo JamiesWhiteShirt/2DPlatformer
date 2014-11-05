@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
 		{
 			Vector2 otherPos = new Vector2(grabbedObject.transform.position.x, grabbedObject.transform.position.y);
 			Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
-			Vector2 desiredPosition = thisPos + rigidbody2D.velocity / 50.0f + new Vector2(grabbedOnRight ? 0.9375f : -0.9375f, (gravityDown ? 1.0f : -1.0f) / 64.0f);
+			Vector2 desiredPosition = thisPos + rigidbody2D.velocity / 50.0f + new Vector2(grabbedOnRight ? 0.9375f : -0.9375f, (gravityDown ? 1.0f : -1.0f) / 128.0f);
 
 			Vector2 force = (desiredPosition - otherPos).normalized * 5.0f;
 			if ((desiredPosition - otherPos).magnitude < force.magnitude)
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
 		float x = rigidbody2D.velocity.x + speed * Time.fixedDeltaTime * 3.0f;
 		float y = rigidbody2D.velocity.y;
 
-		if (grabbedObject == null && speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
+		if (grabbedObject == null && y > 0.0f && speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
 		{
 			if (y < -wallSlideSpeed) y = (-wallSlideSpeed + y * 3) / 4.0f;
 		}
