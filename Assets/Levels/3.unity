@@ -785,7 +785,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &196590211
@@ -1066,7 +1066,7 @@ Transform:
   - {fileID: 2031968583}
   - {fileID: 568276103}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &321706397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ Transform:
   m_Children:
   - {fileID: 595736085}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &333993090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2540,7 +2540,7 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
 --- !u!1001 &699287468
 Prefab:
   m_ObjectHideFlags: 0
@@ -2837,7 +2837,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 864
-    _typelessdata: 000000bf00000000000000000000000000000000000080bfeccea20d0000803e0000403f000000bf0000803f000000000000000000000000000080bf0000403f0000803e0000803faaaaaabe0000803f000000000000000000000000000080bf0000803f0000003f0000803faaaaaabe0000803f000000000000000000000000000080bf000000bf0000003f0000803faaaaaabe00000000000000000000000000000000000080bf000000000000003f0000403f000000bf00000000000000000000000000000000000080bf000000000000803e0000403faaaaaabe00000000000000000000000000000000000080bf000000000000003f0000403faaaaaabe0000803f000000000000000000000000000080bf000080bf0000003f0000803f000000330000803f000000000000000000000000000080bf0000803e0000803f0000803f000000330000803f000000000000000000000000000080bf0000403f0000803f0000803f0000003300000000000000000000000000000000000080bf000000000000803f0000403faaaaaabe00000000000000000000000000000000000080bf2460a10d0000003f0000403f0000003300000000000000000000000000000000000080bf000000000000003f0000403f000000330000803f000000000000000000000000000080bf00004c3e0000003f0000803faaaaaa3e0000803f000000000000000000000000000080bf00000000feff7f3f0000803faaaaaa3e0000803f000000000000000000000000000080bf0000b83dfeff7f3f0000803faaaaaa3e00000000000000000000000000000000000080bf00000000feff7f3f0000403f0000003300000000000000000000000000000000000080bf0000f83d0000003f0000403faaaaaa3e00000000000000000000000000000000000080bf900000000000803e0000403faaaaaa3e0000803f000000000000000000000000000080bf1e0000000000803e0000803f0000003f0000803f000000000000000000000000000080bf000000000000003f0000803f0000003f0000803f000000000000000000000000000080bf000002000000003f0000803f0000003f00000000000000000000000000000000000080bf0c000e000000003f0000403faaaaaa3e00000000000000000000000000000000000080bf000000000000803e0000403f
+    _typelessdata: 000000bf00000000000000000000000000000000000080bf280029000000803e0000403f000000bf0000803f000000000000000000000000000080bf0000803f0000803e0000803faaaaaabe0000803f000000000000000000000000000080bf000040c00000003f0000803faaaaaabe0000803f000000000000000000000000000080bf000000000000003f0000803faaaaaabe00000000000000000000000000000000000080bf000000000000003f0000403f000000bf00000000000000000000000000000000000080bf000000000000803e0000403faaaaaabe00000000000000000000000000000000000080bf000000000000003f0000403faaaaaabe0000803f000000000000000000000000000080bf000080bf0000003f0000803f000000330000803f000000000000000000000000000080bf0000803f0000803f0000803f000000330000803f000000000000000000000000000080bf0000403f0000803f0000803f0000003300000000000000000000000000000000000080bf000080bf0000803f0000403faaaaaabe00000000000000000000000000000000000080bf0000803f0000003f0000403f0000003300000000000000000000000000000000000080bf000000000000003f0000403f000000330000803f000000000000000000000000000080bf000000000000003f0000803faaaaaa3e0000803f000000000000000000000000000080bf00000000feff7f3f0000803faaaaaa3e0000803f000000000000000000000000000080bf000080bffeff7f3f0000803faaaaaa3e00000000000000000000000000000000000080bf0000003ffeff7f3f0000403f0000003300000000000000000000000000000000000080bf0000803f0000003f0000403faaaaaa3e00000000000000000000000000000000000080bf000040400000803e0000403faaaaaa3e0000803f000000000000000000000000000080bf000000000000803e0000803f0000003f0000803f000000000000000000000000000080bf000000000000003f0000803f0000003f0000803f000000000000000000000000000080bf000000000000003f0000803f0000003f00000000000000000000000000000000000080bf000000000000003f0000403faaaaaa3e00000000000000000000000000000000000080bf000080bf0000803e0000403f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2976,7 +2976,7 @@ Transform:
   m_Children:
   - {fileID: 245283765}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
 --- !u!1 &823108043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,7 +3182,7 @@ Transform:
   m_LocalScale: {x: 1, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
 --- !u!1 &881275461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4498,7 +4498,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f4111e3df0b5a4fbdaa1ff34aaa5facd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1013050666
@@ -4688,6 +4688,56 @@ Mesh:
     m_Extent: {x: .5, y: .5, z: 0}
   m_MeshUsageFlags: 0
   m_MeshOptimized: 0
+--- !u!1 &1020364286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1020364288}
+  - 212: {fileID: 1020364287}
+  m_Layer: 0
+  m_Name: Lightbridge crossing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1020364287
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1020364286}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 1ecd6564ef42a1d4a838617b309465cc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &1020364288
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1020364286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
 --- !u!1 &1027294071
 GameObject:
   m_ObjectHideFlags: 0
@@ -4851,7 +4901,7 @@ Transform:
   - {fileID: 599602250}
   - {fileID: 74259989}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
 --- !u!1 &1142585572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4863,6 +4913,7 @@ GameObject:
   - 61: {fileID: 1142585576}
   - 50: {fileID: 1142585575}
   - 114: {fileID: 1142585574}
+  - 82: {fileID: 1142585577}
   m_Layer: 10
   m_Name: Teslaboy
   m_TagString: Player
@@ -4886,7 +4937,7 @@ Transform:
   - {fileID: 730906822}
   - {fileID: 2052299170}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!114 &1142585574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4931,6 +4982,65 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .875, y: .9375}
   m_Center: {x: 0, y: 0}
+--- !u!82 &1142585577
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: a4e01a14a81408440a0e5740185b081a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1425907506}
+  m_GameObject: {fileID: 1142585572}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 35fa9771938c08840b8527ce76642f17, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1143647207
 GameObject:
   m_ObjectHideFlags: 0
@@ -6394,7 +6504,7 @@ Transform:
   m_Children:
   - {fileID: 1666921183}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!43 &1264889480
 Mesh:
   m_ObjectHideFlags: 0
@@ -7344,6 +7454,7 @@ GameObject:
   - 212: {fileID: 1491102492}
   - 61: {fileID: 1491102491}
   - 114: {fileID: 1491102490}
+  - 95: {fileID: 1491102494}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -7409,7 +7520,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
+--- !u!95 &1491102494
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 9500000, guid: c46e148c88c39d243810d9928d64926d,
+    type: 2}
+  m_PrefabInternal: {fileID: 201613024}
+  m_GameObject: {fileID: 1491102489}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a022bb758730b994c855d98cbef92e1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1510175981
 GameObject:
   m_ObjectHideFlags: 0
@@ -7678,7 +7805,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1626628279
@@ -7692,7 +7819,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1643828505
 GameObject:
   m_ObjectHideFlags: 0

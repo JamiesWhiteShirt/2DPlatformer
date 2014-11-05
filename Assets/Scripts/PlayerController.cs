@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	public float jumpSpeed = 10.0f;
 	public float wallJumpPower = 1.0f;
 	public float wallSlideSpeed = 1.0f;
+	public float stopSpeed = 1.0f;
 
 	private bool facingRight = true;
 	private bool gravityDown = true;
@@ -142,12 +143,6 @@ public class PlayerController : MonoBehaviour
 		{
 			Kill();
 			return;
-		}
-
-		if (Input.GetButtonDown("Eight"))
-		{
-			AudioSource audioSource = GetComponent<AudioSource>();
-			audioSource.Play();
 		}
 
 		bool isStanding = touchingGround();
@@ -325,7 +320,7 @@ public class PlayerController : MonoBehaviour
 			setGravity(gravity < 0.0f);
 		}
 
-		float x = rigidbody2D.velocity.x + speed * Time.deltaTime * 3.0f;
+		float x = rigidbody2D.velocity.x + speed * Time.fixedDeltaTime * 3.0f;
 		float y = rigidbody2D.velocity.y;
 
 		if (grabbedObject == null && speed != 0.0f && (speed < 0.0 ^ facingRight) && facingWall)
@@ -333,8 +328,24 @@ public class PlayerController : MonoBehaviour
 			if (y < -wallSlideSpeed) y = (-wallSlideSpeed + y * 3) / 4.0f;
 		}
 
-		if (x > currentTopSpeed) x = currentTopSpeed;
-		else if (x < -currentTopSpeed) x = -currentTopSpeed;
+		if (speed != 0.0f)
+		{
+			if (x > currentTopSpeed) x = currentTopSpeed;
+			else if (x < -currentTopSpeed) x = -currentTopSpeed;
+		}
+		else if(isStanding)
+		{
+			if (x > 0.0f)
+			{
+				x -= stopSpeed * Time.fixedDeltaTime;
+				if (x < 0.0f) x = 0.0f;
+			}
+			else if (x < 0.0f)
+			{
+				x += stopSpeed * Time.fixedDeltaTime;
+				if (x > 0.0f) x = 0.0f;
+			}
+		}
 
 		rigidbody2D.velocity = new Vector2(x, y);
 

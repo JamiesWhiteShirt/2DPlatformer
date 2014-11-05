@@ -415,7 +415,57 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 49
+  m_RootOrder: 48
+--- !u!1 &78714160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 78714162}
+  - 212: {fileID: 78714161}
+  m_Layer: 0
+  m_Name: Stasis slide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &78714161
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78714160}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8786f116db1ad704191465d47dc199fe, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &78714162
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78714160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 57
 --- !u!1001 &114074712
 Prefab:
   m_ObjectHideFlags: 0
@@ -607,7 +657,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &196590211
@@ -2897,6 +2947,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 28
+--- !u!1 &384624443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 384624445}
+  - 212: {fileID: 384624444}
+  m_Layer: 0
+  m_Name: Stasis crate ramp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &384624444
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 384624443}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 7019c8b43637b2346b6c7f8a635b88c3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &384624445
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 384624443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 58
 --- !u!1 &386807984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,7 +4597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_RootOrder: 49
 --- !u!1 &693069821
 GameObject:
   m_ObjectHideFlags: 0
@@ -4973,7 +5073,7 @@ Mesh:
       dividerOp: 0
       frequency: 0
     m_DataSize: 648
-    _typelessdata: 000000bf00000000000000000000000000000000000080bf000000000000803e0000403f000000bf0000803f000000000000000000000000000080bf0000403f0000803e0000803f000080be0000803f000000000000000000000000000080bf0000803f0000003f0000803f000080be0000803f000000000000000000000000000080bf000000c00000003f0000803f000080be00000000000000000000000000000000000080bf000000000000003f0000403f000000bf00000000000000000000000000000000000080bf000000000000803e0000403f000080be00000000000000000000000000000000000080bf000000000000003f0000403f000080be0000803f000000000000000000000000000080bf000080bf0000003f0000803f0000803e0000803f000000000000000000000000000080bf0000803e0000803f0000803f0000803e0000803f000000000000000000000000000080bf000000000000803f0000803f0000803e00000000000000000000000000000000000080bf000000000000803f0000403f000080be00000000000000000000000000000000000080bf000000400000003f0000403f0000803e00000000000000000000000000000000000080bf000000000000803e0000403f0000803e0000803f000000000000000000000000000080bf000000000000803e0000803f0000003f0000803f000000000000000000000000000080bf000000000000003f0000803f0000003f0000803f000000000000000000000000000080bf000080bf0000003f0000803f0000003f00000000000000000000000000000000000080bf100011000000003f0000403f0000803e00000000000000000000000000000000000080bf2460a10d0000803e0000403f
+    _typelessdata: 000000bf00000000000000000000000000000000000080bf000000bf0000803e0000403f000000bf0000803f000000000000000000000000000080bf0000403f0000803e0000803f000080be0000803f000000000000000000000000000080bf0000803f0000003f0000803f000080be0000803f000000000000000000000000000080bf000040c00000003f0000803f000080be00000000000000000000000000000000000080bf000000000000003f0000403f000000bf00000000000000000000000000000000000080bf000000000000803e0000403f000080be00000000000000000000000000000000000080bf000000000000003f0000403f000080be0000803f000000000000000000000000000080bf000080bf0000003f0000803f0000803e0000803f000000000000000000000000000080bf000000000000803f0000803f0000803e0000803f000000000000000000000000000080bf000000000000803f0000803f0000803e00000000000000000000000000000000000080bf000000000000803f0000403f000080be00000000000000000000000000000000000080bfffffff3f0000003f0000403f0000803e00000000000000000000000000000000000080bf000000000000803e0000403f0000803e0000803f000000000000000000000000000080bf000000000000803e0000803f0000003f0000803f000000000000000000000000000080bf000000000000003f0000803f0000003f0000803f000000000000000000000000000080bf000080bf0000003f0000803f0000003f00000000000000000000000000000000000080bf0000803e0000003f0000403f0000803e00000000000000000000000000000000000080bf0000803f0000803e0000403f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -6576,7 +6676,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f4111e3df0b5a4fbdaa1ff34aaa5facd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &979719575
@@ -7283,7 +7383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 47
+  m_RootOrder: 46
 --- !u!1 &1094755076
 GameObject:
   m_ObjectHideFlags: 0
@@ -7380,7 +7480,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1094755082
@@ -7479,6 +7579,7 @@ GameObject:
   - 61: {fileID: 1142585576}
   - 50: {fileID: 1142585575}
   - 114: {fileID: 1142585574}
+  - 82: {fileID: 1142585577}
   m_Layer: 10
   m_Name: Teslaboy
   m_TagString: Player
@@ -7547,6 +7648,65 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .875, y: .9375}
   m_Center: {x: 0, y: 0}
+--- !u!82 &1142585577
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: a4e01a14a81408440a0e5740185b081a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1425907506}
+  m_GameObject: {fileID: 1142585572}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 35fa9771938c08840b8527ce76642f17, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1143432327
 GameObject:
   m_ObjectHideFlags: 0
@@ -7787,7 +7947,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 48
+  m_RootOrder: 47
 --- !u!1 &1191544290
 GameObject:
   m_ObjectHideFlags: 0
@@ -7865,6 +8025,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 43
+--- !u!1 &1196036331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1196036333}
+  - 212: {fileID: 1196036332}
+  m_Layer: 0
+  m_Name: Stasis crate drop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1196036332
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1196036331}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: f2b20d9d358b4ef4c9b543284eec3f43, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &1196036333
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1196036331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 56
 --- !u!1 &1207378967
 GameObject:
   m_ObjectHideFlags: 0
@@ -9110,7 +9320,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 30
 --- !u!1001 &1381403479
 Prefab:
   m_ObjectHideFlags: 0
@@ -11197,7 +11407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 45
 --- !u!1001 &1490794337
 Prefab:
   m_ObjectHideFlags: 0
@@ -12011,7 +12221,7 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1626628279
@@ -12160,7 +12370,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 31
 --- !u!1 &1659476603
 GameObject:
   m_ObjectHideFlags: 0
@@ -14976,7 +15186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_RootOrder: 44
 --- !u!1001 &2031225361
 Prefab:
   m_ObjectHideFlags: 0
@@ -15124,7 +15334,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 29
 --- !u!43 &2069939237
 Mesh:
   m_ObjectHideFlags: 0
