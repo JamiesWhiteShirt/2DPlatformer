@@ -150,8 +150,10 @@ public class PlayerController : MonoBehaviour
 
 		if (isStanding) animator.SetBool("JumpingFromWall", false);
 
-		if (grabbedObject == null && Input.GetButtonDown("Jump"))
+		if (Input.GetButtonDown("Jump"))
 		{
+			setGrabbedObject(null);
+
 			Vector3 vel;
 			if (facingWall && !isStanding)
 			{
