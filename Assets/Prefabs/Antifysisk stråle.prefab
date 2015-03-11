@@ -11,7 +11,7 @@ GameObject:
   - 120: {fileID: 12000000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: Laser
+  m_Name: StasisBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,9 +42,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   m_Layer: 0
-  m_Name: LaserEmitter
+  m_Name: "Antifysisk str\xE5le"
   m_TagString: Untagged
-  m_Icon: {fileID: -1003283189, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -59,7 +59,7 @@ GameObject:
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
   m_Layer: 8
-  m_Name: Fizzle
+  m_Name: Radiation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 6.5, z: 0}
+  m_LocalPosition: {x: -8, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f47a4e902b14974bb2a13c6920070d1, type: 3}
+  m_Script: {fileID: 11500000, guid: a232a5bed2f821d44a752507d1583e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 100
@@ -141,7 +141,7 @@ LineRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ed29ee146f063d84fa54ed368aaecc31, type: 2}
+  - {fileID: 2100000, guid: 72ccc16d2fe39f340ad69de876e6ddef, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -212,7 +212,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: .25
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -414,8 +414,8 @@ ParticleSystem:
     radius: 1
     angle: 25
     length: 5
-    boxX: 0
-    boxY: 0
+    boxX: 1
+    boxY: 1
     boxZ: 0
     placementMode: 0
     m_Mesh: {fileID: 0}
@@ -424,7 +424,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 5
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -673,9 +673,9 @@ ParticleSystem:
     cycles: 1
     randomRow: 1
   VelocityModule:
-    enabled: 1
+    enabled: 0
     x:
-      scalar: -.25
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1226,7 +1226,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 8263a55d948bcf7409de15ec519afd60, type: 2}
+  - {fileID: 2100000, guid: 7e260f460c27a934b96835d4d6f9db14, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

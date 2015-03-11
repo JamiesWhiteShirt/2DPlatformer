@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   m_Layer: 10
-  m_Name: Teslaboy
+  m_Name: Spiller
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

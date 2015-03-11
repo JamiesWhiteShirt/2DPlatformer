@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: LightCrate
+  m_Name: Tung kasse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.5, y: -2.5, z: 0}
+  m_LocalPosition: {x: -3.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,11 +66,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad88e39459bb32c44afd47b58e09f5c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 108550590035a4f4d9d6c10c1e4f971f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbableByPlayer: 1
-  grabbedByPlayer: 0
+  constrainX: 1
+  constrainY: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,11 +79,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 108550590035a4f4d9d6c10c1e4f971f, type: 3}
+  m_Script: {fileID: 11500000, guid: ad88e39459bb32c44afd47b58e09f5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constrainX: 0
-  constrainY: 0
+  grabbableByPlayer: 0
+  grabbedByPlayer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -103,8 +103,8 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300002, guid: f714ce5431d06214197b07740b34ae33, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300004, guid: 0411c9c03394c6e40b407ae8bc993ae6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
